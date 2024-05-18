@@ -13,6 +13,7 @@ import {
   getHighestPrice,
   getLowestPrice,
 } from "@/lib/utils";
+import { Product as ProductType } from "@/types";
 import { NextResponse } from "next/server";
 
 export const maxDuration = 58;
@@ -27,7 +28,7 @@ export async function GET() {
     if (!products) throw new Error("No product fetched");
 
     const updatedProducts = await Promise.all(
-      products.map(async (currentProduct) => {
+      products.map(async (currentProduct: ProductType) => {
         let scrapedProduct;
         switch (currentProduct.website) {
           case "amazon":
