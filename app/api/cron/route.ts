@@ -24,7 +24,7 @@ export async function GET() {
     connectToDB();
     const products = await Product.find({});
 
-    if (!products) throw new Error("Product not found");
+    if (!products) throw new Error("No product fetched");
 
     const updatedProducts = await Promise.all(
       products.map(async (currentProduct) => {
