@@ -2,6 +2,7 @@
 import { User } from "@/types";
 import { revalidatePath } from "next/cache";
 import Product from "../models/product.model";
+import { Product as ProductType } from "@/types";
 import { connectToDB } from "../mongoose";
 import {
   scrapeAmazonProduct,
@@ -129,5 +130,56 @@ export async function addUserEmailToProduct(
     }
   } catch (error) {
     console.log(error);
+  }
+}
+export async function test() {
+  try {
+    connectToDB();
+    const products = await Product.find({});
+
+    if (!products) throw new Error("No product fetched");
+
+    const updatedProducts = await Promise.all(
+      products.map(async (currentProduct: ProductType) => {
+        let scrapedProduct;
+        switch (currentProduct.website) {
+          case "amazon":
+            scrapedProduct = await scrapeAmazonProduct(currentProduct.url);
+            break;
+          case "ajio":
+            scrapedProduct = await scrapeAjioProduct(currentProduct.url);
+            break;
+          case "purplle":
+            scrapedProduct = await scrapePurplleProduct(currentProduct.url);
+            break;
+          case "snapdeal":
+            scrapedProduct = await scrapeSnapdealProduct(currentProduct.url);
+            break;
+        }
+
+        if (!scrapedProduct) throw new Error("Product not found");
+        const updatedPriceHistory = [
+          ...currentProduct.priceHistory,
+          { price: scrapedProduct.currentPrice },
+        ];
+
+        const product = {
+          ...scrapedProduct,
+          priceHistory: updatedPriceHistory,
+          lowestPrice: getLowestPrice(updatedPriceHistory),
+          highestPrice: getHighestPrice(updatedPriceHistory),
+          averagePrice: getAveragePrice(updatedPriceHistory),
+        };
+
+        const updatedProduct = await Product.findOneAndUpdate(
+          { url: product.url },
+          product
+        );
+
+        return updatedProduct;
+      })
+    );
+  } catch (error) {
+    throw new Error(`Error in GET:${error}`);
   }
 }
