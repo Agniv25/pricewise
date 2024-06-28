@@ -20,17 +20,11 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## Learn More
+## Project Features
 
-To learn more about Next.js, take a look at the following resources:
+This project is designed to help you track product prices and availability on various e-commerce platforms including Amazon, Azio, Purple, and Snitch. Key features include:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Price Tracking**: Monitor the prices of products and receive notifications when prices drop.
+- **Availability Tracking**: Get notified when a product becomes available if it was previously out of stock.
+- **Scraping Data**: Automatically scrape data from specified e-commerce sites to keep the product information up-to-date.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
