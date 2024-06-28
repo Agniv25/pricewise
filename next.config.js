@@ -10,6 +10,8 @@ const nextConfig = {
       "www.snitch.co.in",
       "n4.sdlcdn.com",
       "n1.sdlcdn.com",
+      "n2.sdlcdn.com",
+      "n3.sdlcdn.com",
     ],
   },
 };
