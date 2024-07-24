@@ -22,7 +22,7 @@ const Navbar = () => {
           </p>
         </Link>
         <div className="nav items-center gap-5">
-          {navIcons.map((icon) => (
+{/*           {navIcons.map((icon) => (
             <Image
               key={icon.alt}
               src={icon.src}
@@ -31,7 +31,7 @@ const Navbar = () => {
               height={28}
               className="object-contain"
             />
-          ))}
+          ))} */}
         </div>
       </nav>
     </header>
